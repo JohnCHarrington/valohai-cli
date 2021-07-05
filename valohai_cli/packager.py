@@ -113,7 +113,7 @@ def package_files_into(
 
 
 def _get_files_with_git(dir: str) -> Iterable[Tuple[str, str]]:
-    for line in check_output('git ls-files --exclude-standard -ocz', cwd=dir, shell=True).split(b'\0'):
+    for line in check_output('git ls-files --exclude-standard -ocz --recurse-submodules', cwd=dir, shell=True).split(b'\0'):
         if line.startswith(b'.'):
             continue
         file = line.decode('utf-8')
